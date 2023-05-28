@@ -18,7 +18,9 @@ public class PlayerMove : MonoBehaviour
     private Vector3 pos;
     private Vector3 currPos;
 
+    //这里是做啦一个点击特效
     public GameObject moveVfx;
+
     private GameObject moveVfyObj;
 
     // Start is called before the first frame update
@@ -28,9 +30,9 @@ public class PlayerMove : MonoBehaviour
         animator = GetComponent<Animator>();
         ct = playerCam.GetCinemachineComponent<CinemachineTransposer>();
         currPos = ct.m_FollowOffset;
+        //点击特效生成
         moveVfyObj = Instantiate(moveVfx);
         moveVfyObj.SetActive(false);
-        //moveVfyObj.transform.position = new(999, 999, 999);
     }
 
     // Update is called once per frame
@@ -50,6 +52,7 @@ public class PlayerMove : MonoBehaviour
             ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             if (Physics.Raycast(ray, out hit))
             {
+                //设定特效位置,并显示
                 moveVfyObj.SetActive(true);
                 moveVfyObj.transform.position = hit.point;
                 nav.destination = hit.point;
@@ -62,10 +65,11 @@ public class PlayerMove : MonoBehaviour
         else
         {
             animator.SetBool("sprinting", false);
+
+            //当特效距离和人物距离一致时候,关闭特效显示
             if (Vector3.Distance(transform.position, moveVfyObj.transform.position) < 0.2f)
             {
                 moveVfyObj.SetActive(false);
-                // moveVfyObj.transform.position = new(999, 999, 999);
             }
         }
 
