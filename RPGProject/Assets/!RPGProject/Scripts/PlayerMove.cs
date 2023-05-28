@@ -18,6 +18,9 @@ public class PlayerMove : MonoBehaviour
     private Vector3 pos;
     private Vector3 currPos;
 
+    public GameObject moveVfx;
+    private GameObject moveVfyObj;
+
     // Start is called before the first frame update
     private void Start()
     {
@@ -25,6 +28,9 @@ public class PlayerMove : MonoBehaviour
         animator = GetComponent<Animator>();
         ct = playerCam.GetCinemachineComponent<CinemachineTransposer>();
         currPos = ct.m_FollowOffset;
+        moveVfyObj = Instantiate(moveVfx);
+        moveVfyObj.SetActive(false);
+        //moveVfyObj.transform.position = new(999, 999, 999);
     }
 
     // Update is called once per frame
@@ -44,6 +50,8 @@ public class PlayerMove : MonoBehaviour
             ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             if (Physics.Raycast(ray, out hit))
             {
+                moveVfyObj.SetActive(true);
+                moveVfyObj.transform.position = hit.point;
                 nav.destination = hit.point;
             }
         }
@@ -54,6 +62,11 @@ public class PlayerMove : MonoBehaviour
         else
         {
             animator.SetBool("sprinting", false);
+            if (Vector3.Distance(transform.position, moveVfyObj.transform.position) < 0.2f)
+            {
+                moveVfyObj.SetActive(false);
+                // moveVfyObj.transform.position = new(999, 999, 999);
+            }
         }
 
         if (Input.GetMouseButton(1))
