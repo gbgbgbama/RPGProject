@@ -1,6 +1,10 @@
 fileFormatVersion: 2
+<<<<<<<< Updated upstream:RPGProject/Assets/!RPGProject/ui/UI_Inventory.meta
 guid: cd48e01e27039aa4b9f6bc717ba9f172
 folderAsset: yes
+========
+guid: e57beb19f38c6c8498e03dc0bf26d23b
+>>>>>>>> Stashed changes:RPGProject/Assets/AssetInventory/Documentation/Documentation.pdf.meta
 DefaultImporter:
   externalObjects: {}
   userData: 

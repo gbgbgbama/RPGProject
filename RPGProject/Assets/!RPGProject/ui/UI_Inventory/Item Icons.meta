@@ -1,6 +1,10 @@
 fileFormatVersion: 2
+<<<<<<<< Updated upstream:RPGProject/Assets/!RPGProject/ui/UI_Inventory/Item Icons.meta
 guid: 8276a8674aff39245aca96da3aa5239e
 folderAsset: yes
+========
+guid: df5b8ec4edb0b554e84daac26f29de6b
+>>>>>>>> Stashed changes:RPGProject/Assets/AssetInventory/Editor/ThirdParty/EditorAudioUtils/URL.url.meta
 DefaultImporter:
   externalObjects: {}
   userData: 
