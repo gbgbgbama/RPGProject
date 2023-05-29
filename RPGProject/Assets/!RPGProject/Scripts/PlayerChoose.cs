@@ -1,11 +1,13 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class PlayerChoose : MonoBehaviour
 {
     public GameObject[] players;
     public int index = 0;
+
+    public InputField inputName;
 
     private void Start()
     {
@@ -26,5 +28,12 @@ public class PlayerChoose : MonoBehaviour
 
         index = index > 0 ? --index : players.Length - 1;
         players[index].SetActive(true);
+    }
+
+    public void QÈ·¶¨()
+    {
+        SaveScriot.playerIndex = index;
+        SaveScriot.playerName = inputName.text.Length > 0 ? inputName.text : "player";
+        SceneManager.LoadScene(1);
     }
 }
