@@ -23,6 +23,8 @@ public class PlayerMove : MonoBehaviour
 
     private GameObject moveVfyObj;
 
+    public static bool canMove = true;
+
     // Start is called before the first frame update
     private void Start()
     {
@@ -47,7 +49,7 @@ public class PlayerMove : MonoBehaviour
         ct.m_FollowOffset = currPos;
 
         //用导航让人物移动的实现过程
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(0) && canMove)
         {
             ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             if (Physics.Raycast(ray, out hit))
