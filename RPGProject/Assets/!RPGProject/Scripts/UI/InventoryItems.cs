@@ -37,7 +37,7 @@ public class InventoryItems : MonoBehaviour
                 {
                     max = i;//这里其实就让for语句中断啦,不过我还是加啦break以防万一
                     emptySlots[i].sprite = icons[newIcon];
-
+                    emptySlots[i].gameObject.GetComponent<HintMessage>().iconsType = newIcon;
                     break;
                 }
             }
