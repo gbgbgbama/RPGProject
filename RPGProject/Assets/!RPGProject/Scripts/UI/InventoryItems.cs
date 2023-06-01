@@ -10,11 +10,10 @@ public class InventoryItems : MonoBehaviour
     public GameObject closedBook;
 
     public Image[] emptySlots;
-    public Sprite[] icons;
 
-    public static int newIcon = 0;
+    public static int itemId = 0;
     public static bool iconUpdate = false;
-    public static int[] pickupItemNum;
+
     private int max;
 
     // Start is called before the first frame update
@@ -23,7 +22,6 @@ public class InventoryItems : MonoBehaviour
         ClosedMenu();
         //默认先让max是道具格子全部数
         max = emptySlots.Length;
-        pickupItemNum = new int[max];
     }
 
     // Update is called once per frame
@@ -33,11 +31,12 @@ public class InventoryItems : MonoBehaviour
         {
             for (int i = 0; i < max; i++)
             {
-                if (emptySlots[i].sprite == icons[0])
+                if (emptySlots[i].sprite == ItemManage.instance.itemIcons[0])
                 {
                     max = i;//这里其实就让for语句中断啦,不过我还是加啦break以防万一
-                    emptySlots[i].sprite = icons[newIcon];
-                    emptySlots[i].gameObject.GetComponent<HintMessage>().iconsType = newIcon;
+                    emptySlots[i].sprite = ItemManage.instance.itemIcons[itemId];
+                    //格子里显示的图表类型赋值,让他知道自己是那个道具
+                    emptySlots[i].gameObject.GetComponent<HintMessage>().itemId = itemId;
                     break;
                 }
             }

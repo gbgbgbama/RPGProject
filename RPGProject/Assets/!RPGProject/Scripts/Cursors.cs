@@ -20,7 +20,7 @@ public class Cursors : MonoBehaviour
     // Update is called once per frame
     private void Update()
     {
-        cursorObject.transform.position = Input.mousePosition;
+        cursorObject.transform.position = new(Input.mousePosition.x + 14f, Input.mousePosition.y - 26f, Input.mousePosition.z);
         if (Input.GetMouseButton(1))
         {
             cursorImage.sprite = cursorHand;

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
+using static UnityEditor.ShaderData;
 
 public class HintMessage : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
@@ -18,14 +19,14 @@ public class HintMessage : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
     private bool overIcon = false;
 
     //这个值记录啦当前图标是哪个.其中默认值0是不显示说明的
-    public int iconsType = 0;
+    public int itemId = 0;
 
-    public string[] itemName;
-    public string[] itemDescription;
+    //拿到道具文字信息,通过在InventoryItems在改变图标时候赋值默认是空格子0
+    //public IconsTextInfo iconsTextInfo;
 
     public void OnPointerEnter(PointerEventData eventData)
     {
-        if (iconsType > 0)
+        if (itemId > 0)
         {
             overIcon = true;
             if (displaying)  //可以显示时候才显示
@@ -42,7 +43,7 @@ public class HintMessage : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
 
     public void OnPointerExit(PointerEventData eventData)
     {
-        if (iconsType > 0)
+        if (itemId > 0)
         {
             overIcon = false;
             hintBox.SetActive(false);
@@ -68,73 +69,11 @@ public class HintMessage : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
 
     private void MessageDisplay()
     {
-        for (int i = 1; i < InventoryItems.pickupItemNum.Length; i++)
-        {
-            if (iconsType == i)
-            {
-                message.text = string.Format("{0}\n数量:{1}\n简介:{2}", itemName[i], InventoryItems.pickupItemNum[i], itemDescription[i]);
-            }
-        }
+        message.text = string.Format("{0}\n数量:{1}/{2}\n简介:{3}", ItemManage.instance.items[itemId].name, ItemManage.instance.items[itemId].num, ItemManage.instance.items[itemId].maxNum, ItemManage.instance.items[itemId].description);
     }
 
     private void Start()
     {
         hintBox.SetActive(false);
-        itemName = new string[]
-        {
-            "",
-            "红蘑菇",
-            "2",
-            "3",
-            "蓝色花",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-        };
-        itemDescription = new string[]
-        {
-            "",
-            "森林里常见的蘑菇,红色可以恢复生命",
-            "2",
-            "3",
-            "森林里常见的花朵,可以卖钱的杂物",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-        };
     }
 }
