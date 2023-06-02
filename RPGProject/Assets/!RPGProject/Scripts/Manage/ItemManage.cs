@@ -9,6 +9,8 @@ public class ItemManage : MonoBehaviour
     public List<ItemBasic> items;
     public Sprite[] itemIcons;
 
+    public int gold;
+
     private void Awake()
     {
         if (instance == null) instance = this;
