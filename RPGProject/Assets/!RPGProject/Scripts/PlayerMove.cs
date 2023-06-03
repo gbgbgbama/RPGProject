@@ -25,6 +25,8 @@ public class PlayerMove : MonoBehaviour
 
     public static bool canMove = true;
 
+    public LayerMask moveMask;
+
     // Start is called before the first frame update
     private void Start()
     {
@@ -52,7 +54,7 @@ public class PlayerMove : MonoBehaviour
         if (Input.GetMouseButtonDown(0) && canMove)
         {
             ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-            if (Physics.Raycast(ray, out hit))
+            if (Physics.Raycast(ray, out hit, 300, moveMask))
             {
                 //设定特效位置,并显示
                 moveVfyObj.SetActive(true);
@@ -69,7 +71,7 @@ public class PlayerMove : MonoBehaviour
             animator.SetBool("sprinting", false);
 
             //当特效距离和人物距离一致时候,关闭特效显示
-            if (Vector3.Distance(transform.position, moveVfyObj.transform.position) < 0.2f)
+            if (Vector3.Distance(transform.position, moveVfyObj.transform.position) < 1f)
             {
                 moveVfyObj.SetActive(false);
             }
